@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function HomePage(props) {
   return (
@@ -11,7 +12,9 @@ export default function HomePage(props) {
         A platform for instructors to organize their student’s grades.
         </div>
         <div className="homepage-button mt-5">
-          <button className="btn btn-primary btn-lg button">login</button>
+          <Link to="/login">
+            <button className="btn btn-primary btn-lg button">login</button>
+          </Link>
         </div>
       </div>
     </div>
