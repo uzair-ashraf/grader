@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomePage from './homepage';
 import AppContext from '../lib/context';
 
@@ -12,8 +12,10 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <div className="min-vh-100 d-flex pt-5">
-        <Route path ="/" Component={HomePage}/>
+      <div className="container min-vh-100">
+        <Router>
+          <Route exact path ="/" component={HomePage}/>
+        </Router>
       </div>
     );
   }

@@ -1,0 +1,24 @@
+.landing-page {
+  font-family: 'Muli', sans-serif;
+  text-align: center;
+}
+.button {
+  background-color: #040CD4;
+  font-size: 2rem;
+}
+.heading {
+  position: relative;
+  font-size: 6rem;
+}
+.subheading {
+  font-size: 1.4rem;
+}
+.heading:before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    transition: all 500ms ease;
+    width: 16rem;
+    background-color: #040CD4;
+}
