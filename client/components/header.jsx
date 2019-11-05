@@ -1,6 +1,6 @@
 import React from 'react';
 import AppContext from '../lib/context';
-import { Drawer } from '@material-ui/core';
+import AppDrawer from './appdrawer';
 
 export default class Header extends React.Component {
   render() {
@@ -15,7 +15,7 @@ export default class Header extends React.Component {
         <header className="navbar fixed-top navbar-light bg-light border-bottom py-0 justify-content-center navigation">
           grader.
           <div className="appDrawer">
-            <i className="fas fa-bars" />
+            <AppDrawer />
           </div>
         </header>
       );

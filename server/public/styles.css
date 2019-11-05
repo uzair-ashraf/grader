@@ -42,3 +42,9 @@ header {
   right: 1rem;
   top: 2px;
 }
+
+#drop-down-item {
+  background-color: white;
+  color: black;
+  font-size: 1.6rem;
+}

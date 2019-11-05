@@ -14,6 +14,7 @@ export default class App extends React.Component {
     };
     this.loggingIn = this.loggingIn.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
+    this.logout = this.logout.bind(this);
   }
   loggingIn(user) {
     return axios.get(`api/instructor_data.php?id=${user}`)
@@ -25,11 +26,15 @@ export default class App extends React.Component {
   isLoggedIn() {
     return !!this.state.user;
   }
+  logout() {
+    this.setState({ user: null });
+  }
   render() {
     const contextValue = {
       user: this.state.user,
       loggingIn: this.loggingIn,
-      isLoggedIn: this.isLoggedIn
+      isLoggedIn: this.isLoggedIn,
+      logout: this.logout
     };
     return (
       <div className="container min-vh-100 pt-5">
