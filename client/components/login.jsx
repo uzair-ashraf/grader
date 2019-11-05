@@ -25,7 +25,13 @@ export default class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     if (!this.state.selectedInstructor) return;
-    this.context.getUserData(this.state.selectedInstructor);
+    axios.get(`api/instructor_data.php?id=${this.state.selectedInstructor}`)
+      .then(response => {
+        this.context.user = response.data;
+      })
+      .then(() => this.props.history.push('/classes'))
+      .catch(error => console.error(error));
+
   }
   handleChange(e) {
     this.setState({ selectedInstructor: e.target.value });
