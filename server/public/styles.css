@@ -33,7 +33,7 @@ header {
 .login-form {
   text-align: center;
 }
-.course {
+.course, .student {
   font-size: 1.6rem;
   text-transform: capitalize;
 }

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomePage from './homepage';
 import Login from './login';
 import Classes from './classes';
+import Students from './students';
 import axios from 'axios';
 import AppContext from '../lib/context';
 
@@ -43,6 +44,7 @@ export default class App extends React.Component {
             <Route exact path ="/" component={HomePage}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/classes" component={Classes} />
+            <Route exact path="/students" component={Students} />
           </Router>
         </AppContext.Provider>
       </div>
