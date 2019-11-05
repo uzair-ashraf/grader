@@ -39,6 +39,6 @@ header {
 }
 .appDrawer {
   position: absolute;
-  right: 6px;
+  right: 1rem;
   top: 2px;
 }
