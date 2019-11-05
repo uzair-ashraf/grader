@@ -2,9 +2,6 @@ header {
   font-family: 'Muli', sans-serif;
   font-size: 2rem;
 }
-body {
-  padding-top: 1rem;
-}
 .landing-page {
   font-family: 'Muli', sans-serif;
   text-align: center;
@@ -20,7 +17,11 @@ body {
 .subheading {
   font-size: 1.4rem;
 }
-.heading:before{
+.page-heading {
+  position: relative;
+  font-size: 3rem;
+}
+.heading:before, .page-heading:before{
     content: '';
     position: absolute;
     bottom: 0;
@@ -31,4 +32,8 @@ body {
 }
 .login-form {
   text-align: center;
+}
+.course {
+  font-size: 1.6rem;
+  text-transform: capitalize;
 }
