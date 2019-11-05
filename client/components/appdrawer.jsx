@@ -4,10 +4,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 export default class AppDrawer extends React.Component {
   render() {
-    const style = {
-      color: 'black',
-      backgroundColor: 'white'
-    };
     return (
       <Dropdown>
         <Dropdown.Toggle className="fas fa-bars button">
