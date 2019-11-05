@@ -12,19 +12,33 @@ export default class App extends React.Component {
     this.state = {
       user: null
     };
-    this.contextValue = {
-      user: this.state.user,
-      isLoggedIn: this.isLoggedIn.bind(this)
-    };
+    this.loggingIn = this.loggingIn.bind(this);
+    this.isLoggedIn = this.isLoggedIn.bind(this);
+    this.logout = this.logout.bind(this);
   }
-
+  loggingIn(user) {
+    return axios.get(`api/instructor_data.php?id=${user}`)
+      .then(response => {
+        this.setState({ user: response.data });
+      })
+      .catch(error => console.error(error));
+  }
   isLoggedIn() {
     return !!this.state.user;
   }
+  logout() {
+    this.setState({ user: null });
+  }
   render() {
+    const contextValue = {
+      user: this.state.user,
+      loggingIn: this.loggingIn,
+      isLoggedIn: this.isLoggedIn,
+      logout: this.logout
+    };
     return (
       <div className="container min-vh-100 pt-5">
-        <AppContext.Provider value={this.contextValue}>
+        <AppContext.Provider value={contextValue}>
           <Router>
             <Route exact path ="/" component={HomePage}/>
             <Route exact path="/login" component={Login}/>
