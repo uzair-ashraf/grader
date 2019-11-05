@@ -1,10 +1,17 @@
+header {
+  font-family: 'Muli', sans-serif;
+  font-size: 2rem;
+}
+body {
+  padding-top: 1rem;
+}
 .landing-page {
   font-family: 'Muli', sans-serif;
   text-align: center;
 }
 .button {
   background-color: #040CD4;
-  font-size: 2rem;
+  font-size: 1.4rem;
 }
 .heading {
   position: relative;
@@ -21,4 +28,7 @@
     transition: all 500ms ease;
     width: 16rem;
     background-color: #040CD4;
+}
+.login-form {
+  text-align: center;
 }

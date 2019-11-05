@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import axios from 'axios';
+import AppContext from '../lib/context';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -17,12 +18,14 @@ export default class Login extends React.Component {
       .then(response => {
         response.data.reverse();
         this.setState({ instructors: response.data });
-      });
+      })
+      .catch(error => console.error(error));
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.selectedInstructor);
+    if (!this.state.selectedInstructor) return;
+    this.context.getUserData(this.state.selectedInstructor);
   }
   handleChange(e) {
     this.setState({ selectedInstructor: e.target.value });
@@ -33,30 +36,35 @@ export default class Login extends React.Component {
     return (
       <>
       <Header/>
-      <div className="login-page min-vh-100 row align-items-center">
-        <div className="col">
-          <form className="login-form" onSubmit={this.handleSubmit}>
-            <select
-              disabled={disable}
-              onChange={this.handleChange}
-            >
-              <option value="">Select User</option>
-              {this.state.instructors.map(instructor => {
-                return (
-                  <option
-                    key={instructor.instructor_id}
-                    value={instructor.instructor_id}
-                  >
-                    {instructor.username}
-                  </option>
-                );
-              })}
-            </select>
-            <button type="submit" className="btn btn-primary btn-lg button">sign in</button>
-          </form>
+        <div className="login-page min-vh-100 row align-items-center">
+          <div className="col">
+            <form className="login-form" onSubmit={this.handleSubmit}>
+              <div className="form-group mt-5">
+                <select
+                  disabled={disable}
+                  onChange={this.handleChange}
+                  className="form-control form-control-lg"
+                >
+                  <option value="">select user</option>
+                  {this.state.instructors.map(instructor => {
+                    return (
+                      <option
+                        key={instructor.instructor_id}
+                        value={instructor.instructor_id}
+                      >
+                        {instructor.username}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <button type="submit" className="btn btn-primary btn-lg button">sign in</button>
+            </form>
+          </div>
         </div>
-      </div>
       </>
     );
   }
 }
+
+Login.contextType = AppContext;
