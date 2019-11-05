@@ -37,3 +37,8 @@ header {
   font-size: 1.6rem;
   text-transform: capitalize;
 }
+.appDrawer {
+  position: absolute;
+  right: 6px;
+  top: 2px;
+}
