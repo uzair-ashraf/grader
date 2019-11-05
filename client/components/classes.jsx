@@ -5,7 +5,6 @@ import Header from './header';
 export default class Classes extends React.Component {
 
   render() {
-    const { course_id, course_name } = this.context.user.courses;
     return (
       <>
       <Header/>
