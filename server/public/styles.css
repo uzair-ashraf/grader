@@ -2,6 +2,13 @@ header {
   font-family: 'Muli', sans-serif;
   font-size: 2rem;
 }
+a {
+  color: black;
+}
+a:hover {
+  color: darkgray;
+  text-decoration: none;
+}
 .landing-page {
   font-family: 'Muli', sans-serif;
   text-align: center;
@@ -20,6 +27,7 @@ header {
 .page-heading {
   position: relative;
   font-size: 3rem;
+  text-transform: capitalize;
 }
 .heading:before, .page-heading:before{
     content: '';
