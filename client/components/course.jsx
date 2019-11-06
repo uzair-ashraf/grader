@@ -13,7 +13,6 @@ export default class Course extends React.Component {
           </Link>
         </div>
       </div>
-
     );
   }
 }
