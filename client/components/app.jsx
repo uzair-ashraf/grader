@@ -18,6 +18,7 @@ export default class App extends React.Component {
     this.loggingIn = this.loggingIn.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
     this.logout = this.logout.bind(this);
+    this.createCourse = this.createCourse.bind(this);
   }
   loggingIn(user) {
     return axios.get(`api/instructor_data.php?id=${user}`)
@@ -32,27 +33,33 @@ export default class App extends React.Component {
   logout() {
     this.setState({ user: null });
   }
+  createCourse(course) {
+    axios.post('/api/add_course', course)
+      .then(response => console.log(response))
+      .catch(error => console.error(error));
+  }
   render() {
     const contextValue = {
       user: this.state.user,
       loggingIn: this.loggingIn,
       isLoggedIn: this.isLoggedIn,
-      logout: this.logout
+      logout: this.logout,
+      createCourse: this.createCourse
     };
     const AddButtonWithRouter = withRouter(AddButton);
     return (
-      <div className="container min-vh-100 pt-5">
-        <AppContext.Provider value={contextValue}>
-          <Router>
-            <AddButtonWithRouter/>
+      <AppContext.Provider value={contextValue}>
+        <Router>
+          <AddButtonWithRouter />
+          <div className="container min-vh-100 pt-5">
             <Route exact path ="/" component={HomePage}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/classes" component={Classes} />
             <Route exact path="/students" component={Students} />
             <Route exact path="/grades/:courseId" component={GradeTable} />
-          </Router>
-        </AppContext.Provider>
-      </div>
+          </div>
+        </Router>
+      </AppContext.Provider>
     );
   }
 }
