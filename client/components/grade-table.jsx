@@ -1,5 +1,6 @@
 import React from 'react';
 import AppContext from '../lib/context';
+import Header from './header';
 import axios from 'axios';
 
 export default class GradeTable extends React.Component {
@@ -10,10 +11,16 @@ export default class GradeTable extends React.Component {
     };
   }
   componentDidMount() {
-    axios.get();
+    const { instructor_id } = this.context.user;
+    const { courseId } = this.props.match.params;
+    axios.get(`/api/get_grades.php?c_id=${courseId}&i_id=${instructor_id}`)
+      .then(response => this.setState({ grades: response.data }));
   }
 
   render() {
+    if (!this.state.grades) {
+      return 'Loading Grades...';
+    }
     return (
       <>
         <Header />
@@ -22,15 +29,7 @@ export default class GradeTable extends React.Component {
             Grades
           </div>
           <div className="row justify-content-center text-align-center">
-            {this.context.user.courses.map(course => {
-              return (
-                <Course
-                  key={course.course_id}
-                  id={course.course_id}
-                  courseName={course.course_name}
-                />
-              );
-            })}
+            here are ya grades buckeroo
           </div>
         </div>
       </>

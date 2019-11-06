@@ -6,7 +6,7 @@ export default class Course extends React.Component {
     return (
       <div className="course col-10 mt-4">
         <div className="card bg-light">
-          <Link to={`/${this.props.id}/grades`}>
+          <Link to={`/grades/${this.props.id}`}>
             <div className="card-body text-center text-wrap">
               {this.props.courseName}
             </div>

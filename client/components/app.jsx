@@ -46,7 +46,7 @@ export default class App extends React.Component {
             <Route exact path="/login" component={Login}/>
             <Route exact path="/classes" component={Classes} />
             <Route exact path="/students" component={Students} />
-            <Route exact path="/:courseId/grades" component={GradeTable} />
+            <Route exact path="/grades/:courseId" component={GradeTable} />
           </Router>
         </AppContext.Provider>
       </div>
