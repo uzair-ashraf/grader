@@ -56,3 +56,66 @@ a:hover {
   color: black;
   font-size: 1.6rem;
 }
+.add-button {
+  position: fixed;
+  opacity: 0.7;
+  width: 4rem;
+  height: 4rem;
+  right: 1.2rem;
+  bottom: 2.5rem;
+  border-radius: 50%;
+  color: #040CD4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  border: 1px solid #898989;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: white;
+}
+
+.modal-container {
+   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 1;
+}
+.modal-background {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 2;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+  opacity: 0.8;
+  background-color: #C4C4C4;
+}
+.close-modal {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 2rem;
+  opacity: .8;
+}
+.modal {
+  position: fixed;
+  z-index: 3;
+  width: 80%;
+  height: 50vh;
+  border: 2px solid black;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 5px 10px #88888865;
+  padding: 10px;
+}
