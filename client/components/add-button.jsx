@@ -15,7 +15,7 @@ export default class AddButton extends React.Component {
       },
       addGradeForm: {
         student: '',
-        grade: ''
+        grade: '0'
       }
     };
     this.trackCourse = this.trackCourse.bind(this);
@@ -65,10 +65,11 @@ export default class AddButton extends React.Component {
   }
   createGrade(e) {
     e.preventDefault();
+    if (!this.state.addGradeForm.student) return;
     const addGradeForm = { ...this.state.addGradeForm };
     addGradeForm.instructor_id = this.context.user.instructor_id;
     addGradeForm.course_id = this.context.currentCourse;
-    console.log(addGradeForm);
+    this.context.createGrade(addGradeForm);
   }
   render() {
     const { pathname } = this.props.location;
@@ -148,14 +149,11 @@ export default class AddButton extends React.Component {
         );
       }
       if (pathname.includes('/grades/')) {
-        console.log(this.context.currentGrades);
-        console.log(this.context.currentCourse);
         let currentStudents;
         if (!this.context.currentGrades.length) {
           currentStudents = this.context.user.students;
         } else {
           let ignoredIds = this.context.currentGrades.map(grade => grade.student_id);
-          console.log(ignoredIds);
           currentStudents = this.context.user.students.filter(student => {
             return !ignoredIds.includes(student.student_id);
           });
@@ -167,13 +165,14 @@ export default class AddButton extends React.Component {
               <div onClick={() => this.setState({ modalDisplayed: !this.state.modalDisplayed })} className="fas fa-times close-modal" />
               <form className="modal-form text-center" onSubmit={this.createGrade}>
                 <div className="form-group text-center">
+                  <label htmlFor="studentName">Student</label>
                   <select
                     onChange={this.trackSelectedStudent}
-                    className="form-control form-control-lg"
+                    className="form-control form-control"
                     id="studentName"
                   >
                     <option value="">
-                      Select A Student
+
                     </option>
                     {
                       currentStudents.map(student => {

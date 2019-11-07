@@ -14,15 +14,16 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       user: null,
-      currentGrades: null,
+      currentGrades: [],
       currentCourse: null
     };
     this.loggingIn = this.loggingIn.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
     this.logout = this.logout.bind(this);
-    this.setGrades = this.setGrades.bind(this);
+    this.getGrades = this.getGrades.bind(this);
     this.createCourse = this.createCourse.bind(this);
     this.createStudent = this.createStudent.bind(this);
+    this.createGrade = this.createGrade.bind(this);
   }
   loggingIn(user) {
     return axios.get(`api/instructor_data.php?id=${user}`)
@@ -37,8 +38,11 @@ export default class App extends React.Component {
   logout() {
     this.setState({ user: null });
   }
-  setGrades(currentGrades, currentCourse) {
-    this.setState({ currentGrades, currentCourse });
+  getGrades(courseId) {
+    const { instructor_id } = this.state.user;
+    axios.get(`/api/get_grades.php?c_id=${courseId}&i_id=${instructor_id}`)
+      .then(response => this.setState({ currentGrades: response.data, currentCourse: courseId }))
+      .catch(error => console.error(error));
   }
   createCourse(course) {
     axios.post('/api/add_course.php', course)
@@ -61,6 +65,9 @@ export default class App extends React.Component {
         this.setState({ user: userCopy });
       });
   }
+  createGrade(grade) {
+    console.log(grade);
+  }
   render() {
     const contextValue = {
       user: this.state.user,
@@ -70,8 +77,10 @@ export default class App extends React.Component {
       isLoggedIn: this.isLoggedIn,
       logout: this.logout,
       setGrades: this.setGrades,
+      getGrades: this.getGrades,
       createCourse: this.createCourse,
-      createStudent: this.createStudent
+      createStudent: this.createStudent,
+      createGrade: this.createGrade
     };
     const AddButtonWithRouter = withRouter(AddButton);
     return (
