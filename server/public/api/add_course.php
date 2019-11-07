@@ -13,7 +13,7 @@ VALUES ('$courseName', $instructorId)";
 
 $insertCourseResult = mysqli_query($conn, $insertCourseQuery);
 
-if(!$insertCourseQuery) {
+if(!$insertCourseResult) {
   throw new Exception('There was an error adding the course to your database'. mysqli_error($conn));
 }
 

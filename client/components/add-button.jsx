@@ -39,7 +39,7 @@ export default class AddButton extends React.Component {
     e.preventDefault();
     const addStudentForm = { ...this.state.addStudentForm };
     addStudentForm.instructor_id = this.context.user.instructor_id;
-    console.log(addStudentForm);
+    this.context.createStudent(addStudentForm);
   }
   render() {
     const { pathname } = this.props.location;

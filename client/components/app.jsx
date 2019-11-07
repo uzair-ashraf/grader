@@ -19,6 +19,7 @@ export default class App extends React.Component {
     this.isLoggedIn = this.isLoggedIn.bind(this);
     this.logout = this.logout.bind(this);
     this.createCourse = this.createCourse.bind(this);
+    this.createStudent = this.createStudent.bind(this);
   }
   loggingIn(user) {
     return axios.get(`api/instructor_data.php?id=${user}`)
@@ -60,7 +61,8 @@ export default class App extends React.Component {
       loggingIn: this.loggingIn,
       isLoggedIn: this.isLoggedIn,
       logout: this.logout,
-      createCourse: this.createCourse
+      createCourse: this.createCourse,
+      createStudent: this.createStudent
     };
     const AddButtonWithRouter = withRouter(AddButton);
     return (
