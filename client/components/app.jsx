@@ -44,6 +44,16 @@ export default class App extends React.Component {
       })
       .catch(error => console.error(error));
   }
+  createStudent(student) {
+    axios.post('/api/add_student.php', student)
+      .then(response => {
+        const userCopy = { ...this.state.user };
+        userCopy.courses = userCopy.courses.map(courseData => Object.assign({}, courseData));
+        userCopy.students = userCopy.students.map(studentData => Object.assign({}, studentData));
+        userCopy.students.push(response.data);
+        this.setState({ user: userCopy });
+      });
+  }
   render() {
     const contextValue = {
       user: this.state.user,
