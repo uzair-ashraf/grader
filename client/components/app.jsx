@@ -24,6 +24,7 @@ export default class App extends React.Component {
     this.createCourse = this.createCourse.bind(this);
     this.createStudent = this.createStudent.bind(this);
     this.createGrade = this.createGrade.bind(this);
+    this.deleteGrade = this.deleteGrade.bind(this);
   }
   loggingIn(user) {
     return axios.get(`api/instructor_data.php?id=${user}`)
@@ -76,6 +77,18 @@ export default class App extends React.Component {
       })
       .catch(error => console.error(error));
   }
+  deleteGrade(gradeId) {
+    axios.post('/api/delete_grade.php', {
+      'id': gradeId
+    })
+      .then(response => {
+        const updatedGrades = this.state.currentGrades.filter(grade => {
+          return response.data.deleted_id !== grade.grade_id;
+        });
+        this.setState({ currentGrades: updatedGrades });
+      })
+      .catch(error => console.error(error));
+  }
   render() {
     const contextValue = {
       user: this.state.user,
@@ -88,7 +101,8 @@ export default class App extends React.Component {
       getGrades: this.getGrades,
       createCourse: this.createCourse,
       createStudent: this.createStudent,
-      createGrade: this.createGrade
+      createGrade: this.createGrade,
+      deleteGrade: this.deleteGrade
     };
     const AddButtonWithRouter = withRouter(AddButton);
     return (
