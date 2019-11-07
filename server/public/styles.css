@@ -45,6 +45,9 @@ a:hover {
   font-size: 1.6rem;
   text-transform: capitalize;
 }
+.student {
+  text-align: center;
+}
 .appDrawer {
   position: absolute;
   right: 1rem;
@@ -164,4 +167,7 @@ a:hover {
 }
 .course-edit-btn {
   width: 50%;
+}
+.student-buttons {
+  text-align: center;
 }

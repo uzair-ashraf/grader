@@ -26,6 +26,7 @@ export default class App extends React.Component {
     this.createGrade = this.createGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
     this.deleteCourse = this.deleteCourse.bind(this);
+    this.deleteStudent = this.deleteStudent.bind(this);
   }
   loggingIn(user) {
     return axios.get(`api/instructor_data.php?id=${user}`)
@@ -104,6 +105,20 @@ export default class App extends React.Component {
       })
       .catch(error => console.error(error));
   }
+  deleteStudent(studentId) {
+    axios.post('/api/delete_student.php', {
+      'id': studentId
+    })
+      .then(response => {
+        const userCopy = { ...this.state.user };
+        userCopy.students = userCopy.students.map(student => Object.assign({}, student));
+        userCopy.students = userCopy.students.filter(student => {
+          return response.data.deleted_id !== student.student_id;
+        });
+        this.setState({ user: userCopy });
+      })
+      .catch(error => console.error(error));
+  }
   render() {
     const contextValue = {
       user: this.state.user,
@@ -118,7 +133,8 @@ export default class App extends React.Component {
       createStudent: this.createStudent,
       createGrade: this.createGrade,
       deleteGrade: this.deleteGrade,
-      deleteCourse: this.deleteCourse
+      deleteCourse: this.deleteCourse,
+      deleteStudent: this.deleteStudent
     };
     const AddButtonWithRouter = withRouter(AddButton);
     return (
