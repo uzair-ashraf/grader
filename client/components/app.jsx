@@ -66,7 +66,15 @@ export default class App extends React.Component {
       });
   }
   createGrade(grade) {
-    console.log(grade);
+    axios.post('/api/add_grade.php', grade)
+      .then(response => {
+        const gradesCopy = this.state.currentGrades.map(grade => {
+          return Object.assign({}, grade);
+        });
+        gradesCopy.push(response.data);
+        this.setState({ currentGrades: gradesCopy });
+      })
+      .catch(error => console.error(error));
   }
   render() {
     const contextValue = {
