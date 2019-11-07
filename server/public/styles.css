@@ -133,3 +133,35 @@ a:hover {
 .modal-form > * {
   width: 80%;
 }
+
+.edit-btn,.edit-buttons {
+  width: 20%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem;
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+.edit-btn > * {
+  height: 2rem;
+  width: 2rem;
+}
+.edit-btn:hover {
+  color: #040CD4;
+}
+.editCourse {
+  width: 100%;
+  text-align: center;
+}
+.course-name {
+  width: 80%;
+}
+.course-body {
+  display: flex;
+  flex-direction: row;
+}
+.course-edit-btn {
+  width: 50%;
+}
