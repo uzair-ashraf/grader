@@ -16,7 +16,6 @@ export default class AddButton extends React.Component {
   trackCourse({ target: { name, value } }) {
     const addCourseForm = { ...this.state.addCourseForm };
     addCourseForm[name] = value;
-    console.log(addCourseForm);
     this.setState({ addCourseForm });
   }
   createCourse(e) {
