@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AppContext from '../lib/context';
 export default class Course extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +39,16 @@ export default class Course extends React.Component {
         <div className="col-3 my-auto text-center">
           <div className="row justify-content-end">
             <button className="btn btn-primary mr-1">Update</button>
-            <button className="btn btn-danger mr-1">Delete</button>
+            <button
+              onClick={() => this.setState({ editing: !this.state.editing })}
+              className="btn btn-warning mr-1">
+              Cancel
+            </button>
+            <button
+              onClick={() => this.context.deleteCourse(this.props.id)}
+              className="btn btn-danger mr-1">
+              Delete
+            </button>
           </div>
 
         </div>
@@ -62,3 +72,5 @@ export default class Course extends React.Component {
     );
   }
 }
+
+Course.contextType = AppContext;
