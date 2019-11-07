@@ -23,7 +23,7 @@ export default class GradeTable extends React.Component {
           <div className="page-heading">
             {gradesHeading}
           </div>
-          <div className="row justify-content-center text-align-center">
+          <div className="row justify-content-center text-center">
             <table className="table">
               <thead>
                 <tr>
