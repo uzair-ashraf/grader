@@ -15,7 +15,9 @@ export default class GradeTable extends React.Component {
     const { instructor_id } = this.context.user;
     const { courseId } = this.props.match.params;
     axios.get(`/api/get_grades.php?c_id=${courseId}&i_id=${instructor_id}`)
-      .then(response => this.setState({ grades: response.data }));
+      .then(response => this.setState({ grades: response.data },
+        () => this.context.setGrades(response.data, courseId)));
+
   }
 
   render() {

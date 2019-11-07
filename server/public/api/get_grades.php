@@ -6,7 +6,7 @@ require_once('../../db_connection.php');
 $course = intval($_GET['c_id']);
 $instructor = intval($_GET['i_id']);
 
-$gradesQuery = "SELECT G.`grade_id`, S.`name`,C.`course_name`, G.`grade`
+$gradesQuery = "SELECT G.`grade_id`, S.`name`, S.`student_id`,C.`course_name`,C.`course_id`, G.`grade`
 FROM `grades` AS G
 JOIN `courses` AS C
 ON G.`course_id` = C.`course_id`

@@ -13,11 +13,14 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null
+      user: null,
+      currentGrades: null,
+      currentCourse: null
     };
     this.loggingIn = this.loggingIn.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
     this.logout = this.logout.bind(this);
+    this.setGrades = this.setGrades.bind(this);
     this.createCourse = this.createCourse.bind(this);
     this.createStudent = this.createStudent.bind(this);
   }
@@ -33,6 +36,9 @@ export default class App extends React.Component {
   }
   logout() {
     this.setState({ user: null });
+  }
+  setGrades(currentGrades, currentCourse) {
+    this.setState({ currentGrades, currentCourse });
   }
   createCourse(course) {
     axios.post('/api/add_course.php', course)
@@ -58,9 +64,12 @@ export default class App extends React.Component {
   render() {
     const contextValue = {
       user: this.state.user,
+      currentGrades: this.state.currentGrades,
+      currentCourse: this.state.currentCourse,
       loggingIn: this.loggingIn,
       isLoggedIn: this.isLoggedIn,
       logout: this.logout,
+      setGrades: this.setGrades,
       createCourse: this.createCourse,
       createStudent: this.createStudent
     };
