@@ -9,9 +9,22 @@ export default class Course extends React.Component {
       value: this.props.courseName
     };
     this.handleCourseChange = this.handleCourseChange.bind(this);
+    this.updateCourse = this.updateCourse.bind(this);
   }
   handleCourseChange(e) {
     this.setState({ value: e.target.value });
+  }
+  updateCourse() {
+    if (this.state.value === this.props.courseName) {
+      this.setState({ editing: !this.state.editing });
+      return;
+    }
+    const course = {
+      'course_id': this.props.id,
+      'course_name': this.state.value
+    };
+    this.context.updateCourse(course);
+    this.setState({ editing: !this.state.editing });
   }
   render() {
     const handleClick = e => {
@@ -37,8 +50,13 @@ export default class Course extends React.Component {
     const buttons = this.state.editing
       ? (
         <div className="col-3 my-auto text-center">
-          <div className="row justify-content-end">
-            <button className="btn btn-primary mr-1">Update</button>
+          <div
+            onClick={this.updateCourse}
+            className="row justify-content-end">
+            <button
+              className="btn btn-primary mr-1">
+              Update
+            </button>
             <button
               onClick={() => this.setState({ editing: !this.state.editing })}
               className="btn btn-warning mr-1">
