@@ -27,6 +27,9 @@ export default class App extends React.Component {
     this.deleteGrade = this.deleteGrade.bind(this);
     this.deleteCourse = this.deleteCourse.bind(this);
     this.deleteStudent = this.deleteStudent.bind(this);
+    this.updateCourse = this.updateCourse.bind(this);
+    this.updateStudent = this.updateStudent.bind(this);
+    this.updateGrade = this.updateGrade.bind(this);
   }
   loggingIn(user) {
     return axios.get(`api/instructor_data.php?id=${user}`)
@@ -119,6 +122,40 @@ export default class App extends React.Component {
       })
       .catch(error => console.error(error));
   }
+  updateCourse(course) {
+    axios.post('/api/update_course.php', course)
+      .then(response => {
+        const userCopy = { ...this.state.user };
+        userCopy.courses = userCopy.courses.map(courseData => Object.assign({}, courseData));
+        const courseIndex = userCopy.courses.findIndex(course => course.course_id === response.data.course_id);
+        userCopy.courses[courseIndex] = response.data;
+        this.setState({ user: userCopy });
+      })
+      .catch(error => console.error(error));
+  }
+  updateStudent(student) {
+    axios.post('/api/update_student.php', student)
+      .then(response => {
+        const userCopy = { ...this.state.user };
+        userCopy.students = userCopy.students.map(studentData => Object.assign({}, studentData));
+        const studentIndex = userCopy.students.findIndex(student => student.student_id === response.data.student_id);
+        userCopy.students[studentIndex].name = response.data.name;
+        userCopy.students[studentIndex].notes = response.data.notes;
+        this.setState({ user: userCopy });
+      })
+      .catch(error => console.error(error));
+  }
+  updateGrade(grade) {
+    axios.post('/api/update_grade.php', grade)
+      .then(response => {
+        const gradesCopy = this.state.currentGrades.map(grade => {
+          return Object.assign({}, grade);
+        });
+        const gradeIndex = gradesCopy.findIndex(grade => grade.grade_id == response.data.grade_id);
+        gradesCopy[gradeIndex].grade = response.data.grade;
+        this.setState({ currentGrades: gradesCopy });
+      });
+  }
   render() {
     const contextValue = {
       user: this.state.user,
@@ -134,7 +171,10 @@ export default class App extends React.Component {
       createGrade: this.createGrade,
       deleteGrade: this.deleteGrade,
       deleteCourse: this.deleteCourse,
-      deleteStudent: this.deleteStudent
+      deleteStudent: this.deleteStudent,
+      updateCourse: this.updateCourse,
+      updateStudent: this.updateStudent,
+      updateGrade: this.updateGrade
     };
     const AddButtonWithRouter = withRouter(AddButton);
     return (
