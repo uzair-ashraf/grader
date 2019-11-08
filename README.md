@@ -2,6 +2,8 @@
 
 A full stack React application where teachers can keep track of their classes, students, and grades
 
+Mobile and Desktop Oriented
+
 ## Technologies Used
 
 - React.js
