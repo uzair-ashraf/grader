@@ -28,6 +28,7 @@ export default class App extends React.Component {
     this.deleteCourse = this.deleteCourse.bind(this);
     this.deleteStudent = this.deleteStudent.bind(this);
     this.updateCourse = this.updateCourse.bind(this);
+    this.updateStudent = this.updateStudent.bind(this);
   }
   loggingIn(user) {
     return axios.get(`api/instructor_data.php?id=${user}`)
@@ -131,6 +132,9 @@ export default class App extends React.Component {
       })
       .catch(error => console.error(error));
   }
+  updateStudent(student) {
+    console.log(student);
+  }
   render() {
     const contextValue = {
       user: this.state.user,
@@ -147,7 +151,8 @@ export default class App extends React.Component {
       deleteGrade: this.deleteGrade,
       deleteCourse: this.deleteCourse,
       deleteStudent: this.deleteStudent,
-      updateCourse: this.updateCourse
+      updateCourse: this.updateCourse,
+      updateStudent: this.updateStudent
     };
     const AddButtonWithRouter = withRouter(AddButton);
     return (
