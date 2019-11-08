@@ -11,6 +11,14 @@ export default class Grade extends React.Component {
     this.handleGrade = this.handleGrade.bind(this);
     this.updateGrade = this.updateGrade.bind(this);
   }
+  // static getDerivedStateFromProps(props, state) {
+  //   if(props.grade !== state.grade) {
+  //     return {
+  //       grade: props.grade
+  //     }
+  //   }
+  //   return null;
+  // }
   handleGrade(e) {
     this.setState({ grade: e.target.value });
   }
@@ -86,7 +94,7 @@ export default class Grade extends React.Component {
         </form>
       )
       : (
-        this.props.grade
+        this.state.grade
       );
     return (
       <tr>

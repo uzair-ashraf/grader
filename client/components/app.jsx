@@ -146,7 +146,15 @@ export default class App extends React.Component {
       .catch(error => console.error(error));
   }
   updateGrade(grade) {
-    console.log(grade);
+    axios.post('/api/update_grade.php', grade)
+      .then(response => {
+        const gradesCopy = this.state.currentGrades.map(grade => {
+          return Object.assign({}, grade);
+        });
+        const gradeIndex = gradesCopy.findIndex(grade => grade.grade_id == response.data.grade_id);
+        gradesCopy[gradeIndex].grade = response.data.grade;
+        this.setState({ currentGrades: gradesCopy });
+      });
   }
   render() {
     const contextValue = {
