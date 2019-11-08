@@ -52,7 +52,7 @@ To login use any of the two premade users
 
     ```shell
     git clone https://github.com/uzair-ashraf/grader.git
-    cd good-deed
+    cd grader
     ```
 
 1. Install all dependencies with NPM.
