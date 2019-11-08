@@ -21,7 +21,7 @@ if(!$insertStudentResult) {
 $student_id = mysqli_insert_id($conn);
 
 $response = [
-  "student_id" => $student_id,
+  "student_id" => strval($student_id),
   "name" => $studentName,
   "notes" => $studentNotes
 ];
