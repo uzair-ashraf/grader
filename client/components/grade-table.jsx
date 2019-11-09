@@ -16,6 +16,26 @@ export default class GradeTable extends React.Component {
     const gradesHeading = this.context.currentGrades.length
       ? this.context.currentGrades[0].course_name
       : 'Grades';
+    const grades = this.context.currentGrades.length
+      ? (
+        this.context.currentGrades.map(grade => {
+          return (<Grade
+            key={grade.grade_id}
+            id={grade.grade_id}
+            name={grade.name}
+            grade={grade.grade}
+          />
+          );
+        })
+      )
+      : (
+        <tr>
+          <td align="center" colSpan="3">
+          No grades to display
+          </td>
+        </tr>
+
+      );
     return (
       <>
         <Header />
@@ -33,16 +53,7 @@ export default class GradeTable extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.context.currentGrades.map(grade => {
-                  return (<Grade
-                    key={grade.grade_id}
-                    id={grade.grade_id}
-                    name={grade.name}
-                    grade={grade.grade}
-                  />
-                  );
-                })
-                }
+                {grades}
               </tbody>
             </table>
           </div>
