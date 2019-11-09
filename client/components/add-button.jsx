@@ -158,6 +158,9 @@ export default class AddButton extends React.Component {
             return !ignoredIds.includes(student.student_id);
           });
         }
+        const studentNameMessage = currentStudents.length
+          ? ''
+          : 'No Students Available';
         return (
           <div className="modal-container">
             <div className="modal-background" />
@@ -172,7 +175,7 @@ export default class AddButton extends React.Component {
                     id="studentName"
                   >
                     <option value="">
-
+                      {studentNameMessage}
                     </option>
                     {
                       currentStudents.map(student => {
