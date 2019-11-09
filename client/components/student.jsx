@@ -1,5 +1,6 @@
 import React from 'react';
 import AppContext from '../lib/context';
+import { confirmAlert } from 'react-confirm-alert';
 import { Accordion, Card } from 'react-bootstrap';
 
 export default class Student extends React.Component {
@@ -11,6 +12,7 @@ export default class Student extends React.Component {
       notes: this.props.notes
     };
     this.handleStudentChange = this.handleStudentChange.bind(this);
+    this.handleStudentDelete = this.handleStudentDelete.bind(this);
     this.updateStudent = this.updateStudent.bind(this);
   }
 
@@ -30,6 +32,23 @@ export default class Student extends React.Component {
     this.context.updateStudent(studentObject);
     this.setState({ editing: !this.state.editing });
   }
+  handleStudentDelete(e) {
+    e.stopPropagation();
+    confirmAlert({
+      title: 'Are you sure you want to delete this student?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            this.context.deleteStudent(this.props.id);
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
+  }
   render() {
     const buttons = !this.state.editing
       ? (
@@ -40,7 +59,7 @@ export default class Student extends React.Component {
           Update
         </button>
         <button
-          onClick={() => this.context.deleteStudent(this.props.id)}
+          onClick={this.handleStudentDelete}
           className="btn btn-danger">Delete</button>
           </>
       )
