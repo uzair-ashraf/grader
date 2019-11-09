@@ -1,4 +1,5 @@
 import React from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 import AppContext from '../lib/context';
 
 export default class Grade extends React.Component {
@@ -9,6 +10,7 @@ export default class Grade extends React.Component {
       grade: this.props.grade
     };
     this.handleGrade = this.handleGrade.bind(this);
+    this.handleGradeDelete = this.handleGradeDelete.bind(this);
     this.updateGrade = this.updateGrade.bind(this);
   }
   handleGrade(e) {
@@ -32,6 +34,23 @@ export default class Grade extends React.Component {
     };
     this.context.updateGrade(grade);
     this.setState({ editing: !this.state.editing });
+  }
+  handleGradeDelete(e) {
+    e.stopPropagation();
+    confirmAlert({
+      title: `Are you sure you want to remove ${this.props.name}'s grade?`,
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            this.context.deleteGrade(this.props.id);
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
   }
   render() {
     const handleClick = e => {
@@ -62,7 +81,7 @@ export default class Grade extends React.Component {
             Update
           </button>
           <button
-            onClick={() => this.context.deleteGrade(this.props.id)}
+            onClick={this.handleGradeDelete}
             className="btn btn-danger">
             Delete
           </button>

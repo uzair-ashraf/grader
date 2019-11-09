@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../lib/context';
+import { confirmAlert } from 'react-confirm-alert';
+
 export default class Course extends React.Component {
   constructor(props) {
     super(props);
@@ -9,6 +11,7 @@ export default class Course extends React.Component {
       value: this.props.courseName
     };
     this.handleCourseChange = this.handleCourseChange.bind(this);
+    this.handleCourseDelete = this.handleCourseDelete.bind(this);
     this.updateCourse = this.updateCourse.bind(this);
   }
   handleCourseChange(e) {
@@ -25,6 +28,23 @@ export default class Course extends React.Component {
     };
     this.context.updateCourse(course);
     this.setState({ editing: !this.state.editing });
+  }
+  handleCourseDelete(e) {
+    e.stopPropagation();
+    confirmAlert({
+      title: `Are you sure you want to remove ${this.props.courseName}?`,
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            this.context.deleteCourse(this.props.id);
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
   }
   render() {
     const handleClick = e => {
@@ -63,7 +83,7 @@ export default class Course extends React.Component {
               Cancel
             </button>
             <button
-              onClick={() => this.context.deleteCourse(this.props.id)}
+              onClick={this.handleCourseDelete}
               className="btn btn-danger mr-1">
               Delete
             </button>
