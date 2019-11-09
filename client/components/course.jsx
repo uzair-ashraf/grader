@@ -32,7 +32,7 @@ export default class Course extends React.Component {
   handleCourseDelete(e) {
     e.stopPropagation();
     confirmAlert({
-      title: 'Are you sure you want to delete this class?',
+      title: `Are you sure you want to remove ${this.props.courseName}?`,
       buttons: [
         {
           label: 'Yes',

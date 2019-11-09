@@ -35,7 +35,7 @@ export default class Student extends React.Component {
   handleStudentDelete(e) {
     e.stopPropagation();
     confirmAlert({
-      title: 'Are you sure you want to delete this student?',
+      title: `Are you sure you want to remove ${this.props.studentName}?`,
       buttons: [
         {
           label: 'Yes',

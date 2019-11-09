@@ -38,7 +38,7 @@ export default class Grade extends React.Component {
   handleGradeDelete(e) {
     e.stopPropagation();
     confirmAlert({
-      title: 'Are you sure you want to delete this grade?',
+      title: `Are you sure you want to remove ${this.props.name}'s grade?`,
       buttons: [
         {
           label: 'Yes',
