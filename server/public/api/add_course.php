@@ -20,7 +20,7 @@ if(!$insertCourseResult) {
 $course_id = mysqli_insert_id($conn);
 
 $response = [
-  "course_id" => $course_id,
+  "course_id" => strval($course_id),
   "course_name" => $courseName
 ];
 
